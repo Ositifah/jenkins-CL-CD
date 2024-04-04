@@ -10,14 +10,14 @@ pipeline {
                 sh '/opt/apache-maven-3.9.6/bin/mvn clean package'
             }
         }
-        stage('Test') {
+         stage('Test') {
             agent {
                 label 'node1'
             }
             steps {
                 echo 'Running tests'
                 sh 'mvn test'
-                stash name: 'jenkins-CL-CD', includes: "target/*.war" // Corrected the closing parenthesis here
+                stash name: 'jenkins-CL-CD', includes: "target/*.war"
             }
         }
         stage('Deploy') {
