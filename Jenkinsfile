@@ -19,7 +19,7 @@ pipeline {
       echo 'Running tests'
       //Define test steps here
       sh 'mvn test'
-      stash (name: 'jenkins-ci-cd', includes: "target/*war")
+      stash (name: 'jenkins-CL-CD', includes: "target/*war")
     }
     }
     stage('Deploy') {
@@ -29,7 +29,7 @@ pipeline {
       steps {
         echo 'Deploying the application'
         //Define deployment steps here
-        unstash 'jenkins-ci-cd'
+        unstash 'jenkins-CL-CD'
         sh "sudo rm -rf ~/apache*/webapp/*.war"
         sh "sudo mv target/*.war ~/apache*/webapps/"
         sh "sudo systemctl daemon-reload"
@@ -42,8 +42,8 @@ pipeline {
             // Send email notification on completion
             emailext (
                 body: "Check console output at $BUILD_URL to see results,",           
-                subject: "Jenkins Build ${currentBuild.currentResult} jenkins-ci-cd",
-                to: "sam883marc@gmail.com, marcussamuel883@gmail.com", 
+                subject: "Jenkins Build ${currentBuild.currentResult} jenkins-CL-CD",
+                to: "yakubulatifah28@gmail.com, ibrahimlife999@gmail.com", 
                 mimeType: 'text/html'
             )
         }
