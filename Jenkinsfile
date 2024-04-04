@@ -8,7 +8,7 @@ pipeline {
       steps {
         echo 'Building the application'
         //Define build steps here
-        sh '/opt/maven/bin/mvn clean package'
+        sh '/opt/apache-maven-3.9.6/bin/mvn clean package'
       }
     }
     stage('Test') {
@@ -19,7 +19,7 @@ pipeline {
       echo 'Running tests'
       //Define test steps here
       sh 'mvn test'
-      stash (name: 'jenkins-CL-CD', includes: "target/*war")
+      stash (name: 'jenkins-CL-CD', includes: "target/*.war)
     }
     }
     stage('Deploy') {
